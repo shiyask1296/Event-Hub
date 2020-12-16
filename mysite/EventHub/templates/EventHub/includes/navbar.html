@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-xl navbar-black" style="background-color: black; width: 1240px;">
+  <a class="navbar-brand" href="#" style="font-size: 30px;">EventHub</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse container container-fluid" id="navbarSupportedContent">
+    
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      {% if user.is_authenticated %}
+        <li>Welcome {{user.username}}</li>
+        <li><a href="/logout">LOGOUT</a></li>
+      {% else %}
+        <li><a href="/register">REGISTER</a></li>
+        <li><a href="/login">LOGIN</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
