@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<!--
+	Retrospect by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		{% load static %}
+		<title>Retrospect by TEMPLATED</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets1/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="{% static 'assets1/css/main.css'%}" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+		<script type='text/javascript' src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets1/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets1/css/ie9.css" /><![endif]-->
+	</head>
+	<body class="landing">
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<h1><a href="index.html">Retrospect</a></h1>
+				<a href="#nav">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="nav">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li><a href="generic.html">Generic</a></li>
+					<li><a href="elements.html">Elements</a></li>
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section  style="height:60px;" class="container1">
+
+			</section>
+
+			<section id="four" class="wrapper special">
+				<div class="inner">
+					<header class="major narrow">
+						
+						<p>Ipsum dolor tempus commodo adipiscing</p>
+					</header>
+					<form action="#" method="POST">
+						<div class="container 75%">
+							<div class="row uniform 75%">
+
+								<div class="4u 12u$(xsmall)">
+									<input name="name" placeholder="Name" type="text" id="id1" />
+								</div>
+								<div class="4u 12u$(xsmall)">
+									<input name="email" placeholder="Email" type="email" id="id2"/>
+								</div>
+								<div class="4u 12u$(xsmall)">
+									<input name="email" placeholder="Email" type="email" />
+								</div>
+
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" class="special" value="Submit" /></li>
+							<li><input type="reset" class="alt" value="Reset" /></li>
+						</ul>
+					</form>
+				</div>
+				<div class="inner" id="mapid" style="height:700px;width: 80%;">
+				</div>
+			</section>
+
+	    <style type="text/css">
+	      #mapid {
+
+					height: 100%;
+	      width: 80%;
+			align-items: center;}
+	    </style>
+	    <script type="text/javascript">
+	      var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+
+	      L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+	      { attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	    maxZoom: 18,
+			minZoom: 2,
+	    id: 'mapbox/streets-v11',
+	    tileSize: 512,
+	    zoomOffset: -1,
+	    accessToken: 'sk.eyJ1Ijoic2hpeWFzMTIzIiwiYSI6ImNraHA3ajk5eTE2bXIyemsxcTJ4eHoxNGUifQ.gyIx9BSa7heVTUH3HcGc2A'
+	}).addTo(mymap);
+
+
+	var marker = L.marker([51.5, -0.09]).addTo(mymap);
+
+
+
+	var circle = L.circle([51.508, -0.11], {
+	    color: 'red',
+	    fillColor: '#f03',
+	    fillOpacity: 0.5,
+	    radius: 500
+	}).addTo(mymap);
+
+
+	var polygon = L.polygon([
+	    [51.509, -0.08],
+	    [51.503, -0.06],
+	    [51.51, -0.047]
+	]).addTo(mymap);
+
+
+	marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+	circle.bindPopup("I am a circle.");
+	polygon.bindPopup("I am a polygon.");
+
+
+	var popup = L.popup()
+	    .setLatLng([51.5, -0.09])
+	    .setContent("I am a standalone popup.")
+	    .openOn(mymap);
+
+
+	    function onMapClick(e) {
+	    alert("You clicked the map at " + e.latlng);
+	}
+
+	mymap.on('click', onMapClick);
+
+
+	var popup = L.popup();
+
+	function onMapClick(e) {
+	    popup
+	        .setLatLng(e.latlng)
+	        .setContent("You clicked the map at " + e.latlng.toString())
+	        .openOn(mymap);
+
+					var x=e.latlng.toString();
+					var regex=/[+-]?\d+(\.\d+)?/g;
+					var coordinates=x.match(regex).map(function(v){return parseFloat(v);});
+					//var arr=x.split("(");
+					//var ary=arr[1].split(")");
+					//ary=ary[0].split(",");
+					//var lat=ary[0];
+					//ary=ary[1].split(" ");
+					//var lon=ary[1];
+					//document.getElementById('id2').value=lon;
+
+//var y="https://nominatim.openstreetmap.org/reverse?format=jsonv2&"
+					$(document).ready(function(){
+    				$.getJSON("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+coordinates[0]+"&lon="+coordinates[1], function(result){
+							if(result.address.country!=null)
+							{
+								document.getElementById('id1').value=result.address.country;
+								document.getElementById('id2').value=result.address.state;
+							}
+  					});
+					});
+
+				}
+
+				mymap.on('click', onMapClick);
+
+	</script>
+
+		<!-- One -->
+			<section id="one" class="wrapper style1">
+				<div class="inner">
+					<article class="feature left">
+						<span class="image"><img src="{% static 'images/pic01.jpg'%}" alt="" /></span>
+						<div class="content">
+							<h2>Integer vitae libero acrisus egestas placerat  sollicitudin</h2>
+							<p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+					<article class="feature right">
+						<span class="image"><img src="{% static 'images/pic02.jpg'%}" alt="" /></span>
+						<div class="content">
+							<h2>Integer vitae libero acrisus egestas placerat  sollicitudin</h2>
+							<p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est.</p>
+							<ul class="actions">
+								<li>
+									<a href="#" class="button alt">More</a>
+								</li>
+							</ul>
+						</div>
+					</article>
+				</div>
+			</section>
+
+		<!-- Two -->
+			<section id="two" class="wrapper special">
+				<div class="inner">
+					<header class="major narrow">
+						<h2>Aliquam Blandit Mauris</h2>
+						<p>Ipsum dolor tempus commodo turpis adipiscing Tempor placerat sed amet accumsan</p>
+					</header>
+					<div class="image-grid">
+						<a href="#" class="image"><img src="{% static 'images/pic03.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic04.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic05.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic06.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic07.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic08.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic09.jpg'%}" alt="" /></a>
+						<a href="#" class="image"><img src="{% static 'images/pic10.jpg'%}" alt="" /></a>
+					</div>
+					<ul class="actions">
+						<li><a href="#" class="button big alt">Tempus Aliquam</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- Three -->
+			<section id="three" class="wrapper style3 special">
+				<div class="inner">
+					<header class="major narrow	">
+						<h2>Magna sed consequat tempus</h2>
+						<p>Ipsum dolor tempus commodo turpis adipiscing Tempor placerat sed amet accumsan</p>
+					</header>
+					<ul class="actions">
+						<li><a href="#" class="button big alt">Magna feugiat</a></li>
+					</ul>
+				</div>
+			</section>
+
+		<!-- Four -->
+			<section id="four" class="wrapper style2 special">
+				<div class="inner">
+					<header class="major narrow">
+						<h2>Get in touch</h2>
+						<p>Ipsum dolor tempus commodo adipiscing</p>
+					</header>
+					<form action="#" method="POST">
+						<div class="container 75%">
+							<div class="row uniform 50%">
+								<div class="6u 12u$(xsmall)">
+									<input name="name" placeholder="Name" type="text" />
+								</div>
+								<div class="6u$ 12u$(xsmall)">
+									<input name="email" placeholder="Email" type="email" />
+								</div>
+								<div class="12u$">
+									<textarea name="message" placeholder="Message" rows="4"></textarea>
+								</div>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" class="special" value="Submit" /></li>
+							<li><input type="reset" class="alt" value="Reset" /></li>
+						</ul>
+					</form>
+				</div>
+			</section>
+
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-facebook">
+							<span class="label">Facebook</span>
+						</a></li>
+						<li><a href="#" class="icon fa-twitter">
+							<span class="label">Twitter</span>
+						</a></li>
+						<li><a href="#" class="icon fa-instagram">
+							<span class="label">Instagram</span>
+						</a></li>
+						<li><a href="#" class="icon fa-linkedin">
+							<span class="label">LinkedIn</span>
+						</a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled.</li>
+						<li>Images: <a href="http://unsplash.com">Unsplash</a>.</li>
+						<li>Design: <a href="http://templated.co">TEMPLATED</a>.</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets1/js/jquery.min.js'%}"></script>
+			<script src="{% static 'assets1/js/skel.min.js'%}"></script>
+			<script src="{% static 'assets1/js/util.js'%}"></script>
+			<!--[if lte IE 8]><script src="assets1/js/ie/respond.min.js"></script><![endif]-->
+			<script src="{% static 'assets1/js/main.js'%}"></script>
+
+	</body>
+</html>
